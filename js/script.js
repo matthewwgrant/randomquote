@@ -56,15 +56,15 @@ function printQuote() {
         	<p class="quote">${randomQuote.quote}</p>
         	<p class="source">${randomQuote.source}
 		`;
-	if ( randomQuote.hasOwnProperty('citation') && randomQuote.hasOwnProperty('year') ) {
+	if ( 'citation' in randomQuote && 'year' in randomQuote ) {
 		quote += `
 			<span class="citation">${randomQuote.citation}</span><span class="year">${randomQuote.year}</span></p>
 				</div>`;
-		} else if ( randomQuote.hasOwnProperty('citation') ) {
+		} else if ( 'citation' in randomQuote ) {
 			quote += `
 			<span class="citation">${randomQuote.citation}</span></p>
 				</div>`;
-		} else if ( randomQuote.hasOwnProperty('year') ) {
+		} else if ( 'year' in randomQuote ) {
 			quote += `<span class="year">${randomQuote.year}</span></p>
 				</div`;
 		} else {
