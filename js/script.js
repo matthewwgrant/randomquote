@@ -9,12 +9,11 @@ project 1 - A Random Quote Generator
 ***/
 const quotes = [
 	{quote: `To be or not to be, that is the question`, source: `William Shakespeare`, citation: `Hamlet`, year: 1609},
-	{quote: `You miss 100% of the shots that you don't take - Wayne Gretzky`, source: `Michael Scott`, citation: `The Office`, year: 2006},
-	{quote: `Ooh wee ooh I look just like Buddy Holly`, source: `Weezer`, citation: `Blue Album`, year: 1994},
+	{quote: `You miss 100% of the shots that you don't take - Wayne Gretzky`, source: `Michael Scott`, citation: `The Office`},
+	{quote: `Ooh wee ooh I look just like Buddy Holly`, source: `Weezer`, year: 1994},
 	{quote: `When you walk by a store and see 50 guys that look like you fighting over a shirt, you go in there. Yes you do.`, source: `Tim Robinson`, citation: `I Think You Should Leave`, year: 2021},
-	{quote: `When you come to a fork in the road, take it.`, source: `Yogi Berra`, citation: `The Yogi Book: I Really Didn’t Say Everything I Said!`, year: 1988},
-	// {quote: ``, author: ``, citation: ``, year: },
-	// {quote: ``, author: ``, citation: ``, year: }
+	{quote: `When you come to a fork in the road, take it.`, source: `Yogi Berra`},
+	{quote: `There’s only one thing I hate more than lying: skim milk. Which is water that is lying about being milk.`, source: `Ron Swanson`, citation: `Parks and Recreation`, year: 2014}
 ];
 
 
@@ -27,7 +26,7 @@ const quotes = [
 
 function changeBackground() {
 	return Math.floor(Math.random() * 256);
-}
+};
 
 /***
  Uses a random number to generate a number between 0, or
@@ -55,11 +54,27 @@ function printQuote() {
 	let quote = `
 		<div id="quote-box" class="quote-box">
         	<p class="quote">${randomQuote.quote}</p>
-        	<p class="source">${randomQuote.source}<span class="citation">${randomQuote.citation}</span><span class="year">${randomQuote.year}</span></p>
-      	</div>
-	`;
+        	<p class="source">${randomQuote.source}
+		`;
+	if ( randomQuote.hasOwnProperty('citation') && randomQuote.hasOwnProperty('year') ) {
+		quote += `
+			<span class="citation">${randomQuote.citation}</span><span class="year">${randomQuote.year}</span></p>
+				</div>`;
+		} else if ( randomQuote.hasOwnProperty('citation') ) {
+			quote += `
+			<span class="citation">${randomQuote.citation}</span></p>
+				</div>`;
+		} else if ( randomQuote.hasOwnProperty('year') ) {
+			quote += `<span class="year">${randomQuote.year}</span></p>
+				</div`;
+		} else {
+			quote += `</p>
+				</div>`;
+		}
+
 	return document.querySelector('.container').innerHTML = quote;
 }
+
 
 /** 
 	Calls printQuote every 5 seconds even if the
